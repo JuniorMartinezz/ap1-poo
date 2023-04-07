@@ -1,0 +1,15 @@
+D:\code\POO-2023\ap1-poo\bin\Debug\net7.0\ap1-poo.exe
+D:\code\POO-2023\ap1-poo\bin\Debug\net7.0\ap1-poo.deps.json
+D:\code\POO-2023\ap1-poo\bin\Debug\net7.0\ap1-poo.runtimeconfig.json
+D:\code\POO-2023\ap1-poo\bin\Debug\net7.0\ap1-poo.dll
+D:\code\POO-2023\ap1-poo\bin\Debug\net7.0\ap1-poo.pdb
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.csproj.AssemblyReference.cache
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.GeneratedMSBuildEditorConfig.editorconfig
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.AssemblyInfoInputs.cache
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.AssemblyInfo.cs
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.csproj.CoreCompileInputs.cache
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.dll
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\refint\ap1-poo.dll
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.pdb
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ap1-poo.genruntimeconfig.cache
+D:\code\POO-2023\ap1-poo\obj\Debug\net7.0\ref\ap1-poo.dll
