@@ -1,9 +1,10 @@
-﻿using poo_ap1;
+﻿using System.Text.RegularExpressions;
+using poo_ap1;
 class Program
 {
     static void Main(string[] args)
     {
-        int op;
+        string op;
 
         System.Console.WriteLine("\nPrograma iniciado...");
 
@@ -13,21 +14,21 @@ class Program
             (
                 "\nDigite o número do que deseja executar: \n\n1- Criar(Fornecedores, produtos e compras) \n2- Consultar(Fornecedores, produtos e compras) \n3- Efetuar compra \n0- Sair do programa\n"
             );
-            op = Convert.ToInt32(Console.ReadLine());
+            op = Console.ReadLine();
 
             switch (op)
             {
-                case 1: //Criar fornecedor ou produto
+                case "1": //Criar fornecedor ou produto
                     Create();
 
                     break;
 
-                case 2: //Consultar fornecedor, compras e produtos
+                case "2": //Consultar fornecedor, compras e produtos
                     Consult();
 
                     break;
 
-                case 3: //Efetuar compra
+                case "3": //Efetuar compra
                     Buy();
 
                     break;
@@ -36,7 +37,7 @@ class Program
                     System.Console.WriteLine("\nDigite um código válido!");
                     break;
             }
-        } while (op != 0);
+        } while (op != "0");
         System.Console.WriteLine("\nSistema Encerrado!");
     }
 
