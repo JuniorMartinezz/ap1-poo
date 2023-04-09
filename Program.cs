@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using poo_ap1;
+﻿using poo_ap1;
 class Program
 {
     static void Main(string[] args)
@@ -47,7 +46,45 @@ class Program
         } while (op != "0");
         System.Console.WriteLine("\nSistema Encerrado!");
     }
+    static void Create()
+    {
+        System.Console.WriteLine("\nDigite o número correspondente ao processo que deseja realizar\n1- Fornecedor \n2- Produtos \n0- Sair\n");
 
+        string op = Console.ReadLine();
+
+        if (op == "" || op == null)
+        {
+            System.Console.WriteLine("Você precisa digitar um comando válido!");
+            Environment.Exit(0);
+        }
+
+        switch (op)
+        {
+            case "1":
+                CreateSupplier();
+
+                break;
+
+            case "2":
+                if (SupplierRepository.SuppliersList.Count == 0)
+                {
+                    System.Console.WriteLine("\nVocê precisa adicionar fornecedores primeiro!");
+                }
+                else
+                {
+                    CreateProduct();
+                }
+
+                break;
+
+            case "0":
+                break;
+
+            default:
+                System.Console.WriteLine("\nDigite um código válido!");
+                break;
+        }
+    }
     static void CreateProduct() //Criador de produto
     {
         string nameOfProduct;
@@ -282,7 +319,6 @@ class Program
             Environment.Exit(0);
         }
     }
-
     static void ListAllProducts()
     {
         foreach (var c in CooktopRepository.CooktopsList)
@@ -332,45 +368,6 @@ class Program
 
             case "3":
                 ListBuys();
-
-                break;
-
-            case "0":
-                break;
-
-            default:
-                System.Console.WriteLine("\nDigite um código válido!");
-                break;
-        }
-    }
-    static void Create()
-    {
-        System.Console.WriteLine("\nDigite o número correspondente ao processo que deseja realizar\n1- Fornecedor \n2- Produtos \n0- Sair\n");
-
-        string op = Console.ReadLine();
-
-        if (op == "" || op == null)
-        {
-            System.Console.WriteLine("Você precisa digitar um comando válido!");
-            Environment.Exit(0);
-        }
-
-        switch (op)
-        {
-            case "1":
-                CreateSupplier();
-
-                break;
-
-            case "2":
-                if (SupplierRepository.SuppliersList.Count == 0)
-                {
-                    System.Console.WriteLine("\nVocê precisa adicionar fornecedores primeiro!");
-                }
-                else
-                {
-                    CreateProduct();
-                }
 
                 break;
 
