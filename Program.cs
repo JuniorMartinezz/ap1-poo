@@ -1,4 +1,5 @@
-﻿using poo_ap1;
+﻿using System.Text.RegularExpressions;
+using poo_ap1;
 class Program
 {
     static void Main(string[] args)
@@ -93,12 +94,6 @@ class Program
 
         string op = Console.ReadLine();
 
-        if (op == "" || op == null)
-        {
-            System.Console.WriteLine("Você precisa digitar um comando válido!");
-            Environment.Exit(0);
-        }
-
         switch (op)
         {
             case "1":
@@ -174,7 +169,7 @@ class Program
         double inputPrice = Convert.ToDouble(Console.ReadLine());
 
         //Definindo fornecedor do produto
-        System.Console.WriteLine("| Lista de fornecedores |");
+        System.Console.WriteLine("\n| Lista de fornecedores |");
         ListSuppliers();
         System.Console.WriteLine("\nDigite o id correspondente ao fornecedor do produto:");
         int inputId = Convert.ToInt32(Console.ReadLine());
@@ -250,23 +245,83 @@ class Program
     }
     static void ListProducts()
     {
-        System.Console.WriteLine("\nDigite o código de barras do produto que deseja consultar:");
-        long inputCodeBar = Convert.ToInt64(Console.ReadLine());
+        System.Console.WriteLine("\nDigite o tipo de produto que deseja consultar: \n1- Geladeira \n2- Cooktop\n");
+        string op = Console.ReadLine();
 
-        if (CooktopRepository.getOne(inputCodeBar) != null)
-        {
-            CooktopRepository.get(inputCodeBar);
-        }
-        else if (FridgeRepository.getOne(inputCodeBar) != null)
-        {
-            FridgeRepository.get(inputCodeBar);
-        }
-        else
-        {
-            System.Console.WriteLine("\nCódigo de barras inválido!");
-            Environment.Exit(0);
-        }
+        string inputCodeBar;
 
+        switch (op)
+        {
+            case "1":
+                if (FridgeRepository.FridgesList.Count == 0)
+                {
+                    System.Console.WriteLine("\nNenhuma geladeira cadastrada!");
+                }
+                else
+                {
+                    System.Console.WriteLine("\nDigite o código de barras do produto que deseja consultar:");
+                    inputCodeBar = Console.ReadLine();
+
+                    bool reg = Regex.IsMatch(inputCodeBar, "^[a-zA-Z]+$");
+
+                    if (reg)
+                    {
+                        System.Console.WriteLine("\nCódigo de barras inválido!");
+                    }
+                    else
+                    {
+                        if (FridgeRepository.FridgesList.Find(f => f.BarCode == Convert.ToInt64(inputCodeBar)) == null)
+                        {
+                            System.Console.WriteLine("\nCódigo de barras inválido!");
+                        }
+                        else
+                        {
+                            FridgeRepository.get(Convert.ToInt64(inputCodeBar));
+                        }
+                    }
+
+                }
+
+                break;
+
+            case "2":
+                if (CooktopRepository.CooktopsList.Count == 0)
+                {
+                    System.Console.WriteLine("\nNenhum cooktop cadastrado!");
+                }
+                else
+                {
+                    System.Console.WriteLine("\nDigite o código de barras do produto que deseja consultar:");
+                    inputCodeBar = Console.ReadLine();
+
+                    bool reg = Regex.IsMatch(inputCodeBar, "^[a-zA-Z]+$");
+
+                    if (reg)
+                    {
+                        System.Console.WriteLine("\nCódigo de barras inválido!");
+                    }
+                    else
+                    {
+                        if (CooktopRepository.CooktopsList.Find(c => c.BarCode == Convert.ToInt64(inputCodeBar)) == null)
+                        {
+                            System.Console.WriteLine("\nCódigo de barras inválido!");
+                        }
+                        else
+                        {
+                            CooktopRepository.get(Convert.ToInt64(inputCodeBar));
+                        }
+                    }
+                }
+
+                break;
+
+            case "0":
+                break;
+
+            default:
+                System.Console.WriteLine("\nDigite um código válido!");
+                break;
+        }
     }
     static void ListSuppliers() //Listar Fornecedores
     {
@@ -276,10 +331,11 @@ class Program
     {
         DateTime today = DateTime.Now;
 
-        ListAllProducts();
-
         System.Console.WriteLine("\nDigite o id da compra:");
         int idBuy = Convert.ToInt32(Console.ReadLine());
+
+        System.Console.WriteLine("\nLista de produtos:");
+        ListAllProducts();
 
         System.Console.WriteLine("\nDigite o código de barras do produto desejado:");
         long inputCodeBar = Convert.ToInt64(Console.ReadLine());
@@ -340,12 +396,6 @@ class Program
         System.Console.WriteLine("\nDigite o número correspondente ao tipo de consulta que deseja realizar\n1- Fornecedor \n2- Produtos \n3- Compras \n0- Sair\n");
 
         string op = Console.ReadLine();
-
-        if (op == "" || op == null)
-        {
-            System.Console.WriteLine("Você precisa digitar um comando válido!");
-            Environment.Exit(0);
-        }
 
         switch (op)
         {

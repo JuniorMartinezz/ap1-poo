@@ -20,9 +20,12 @@ namespace poo_ap1
             {
                 System.Console.WriteLine("\nNenhuma geladeira cadastrada!");
             }
-            foreach (var f in FridgesList)
+            else
             {
-                Console.WriteLine($"\nCódigo de barras: {f.BarCode} | Nome: {f.Name} | Marca: {f.Brand} | Preço: {f.Price} | Capacidade: {f.Capacity} litros | Cor: {f.Color} | Fornecedor: {f.Supplier.Name}");
+                foreach (var f in FridgesList)
+                {
+                    Console.WriteLine($"\nCódigo de barras: {f.BarCode} | Nome: {f.Name} | Marca: {f.Brand} | Capacidade: {f.Capacity} litros | Cor: {f.Color} | Fornecedor: {f.Supplier.Name} | Preço: {Product.currencyFormatter(f.Price)}");
+                }
             }
         }
 
@@ -32,10 +35,13 @@ namespace poo_ap1
             {
                 System.Console.WriteLine("\nNenhum cooktop cadastrado!");
             }
+            else
+            {
+                var fridgeFound = FridgesList.Find(f => f.BarCode == codeBar);
 
-            var fridgeFound = FridgesList.Find(f => f.BarCode == codeBar);
+                Console.WriteLine($"\nCódigo de barras: {fridgeFound.BarCode} | Nome: {fridgeFound.Name} | Marca: {fridgeFound.Brand} | Capacidade: {fridgeFound.Capacity} | Cor: {fridgeFound.Color} | Fornecedor: {fridgeFound.Supplier.Name} | Preço: {Product.currencyFormatter(fridgeFound.Price)}");
+            }
 
-            Console.WriteLine($"\nCódigo de barras: {fridgeFound.BarCode} | Nome: {fridgeFound.Name} | Marca: {fridgeFound.Brand} | Preço: {fridgeFound.Price} | Capacidade: {fridgeFound.Capacity} | Cor: {fridgeFound.Color} | Fornecedor: {fridgeFound.Supplier.Name}");
         }
 
         public static Fridge getOne(long codeBar)

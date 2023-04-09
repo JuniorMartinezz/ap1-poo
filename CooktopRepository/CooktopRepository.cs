@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace poo_ap1
             }
             foreach (var c in CooktopsList)
             {
-                Console.WriteLine($"\nCódigo de barras: {c.BarCode} | Nome: {c.Name} | Marca: {c.Brand} | Preço: {c.Price} | Bocas: {c.Burners} | Material: {c.Material} | Fornecedor: {c.Supplier.Name}");
+                Console.WriteLine($"\nCódigo de barras: {c.BarCode} | Nome: {c.Name} | Marca: {c.Brand} | Bocas: {c.Burners} | Material: {c.Material} | Fornecedor: {c.Supplier.Name} | Preço: {Product.currencyFormatter(c.Price)}");
             }
         }
         
@@ -35,7 +36,7 @@ namespace poo_ap1
 
             var cooktopFound = CooktopsList.Find(c => c.BarCode == codeBar);
 
-            Console.WriteLine($"\nCódigo de barras: {cooktopFound.BarCode} | Nome: {cooktopFound.Name} | Marca: {cooktopFound.Brand} | Preço: {cooktopFound.Price} | Bocas: {cooktopFound.Burners} | Material: {cooktopFound.Material} | Fornecedor: {cooktopFound.Supplier.Name}");
+            Console.WriteLine($"\nCódigo de barras: {cooktopFound.BarCode} | Nome: {cooktopFound.Name} | Marca: {cooktopFound.Brand} | Bocas: {cooktopFound.Burners} | Material: {cooktopFound.Material} | Fornecedor: {cooktopFound.Supplier.Name} | Preço: {Product.currencyFormatter(cooktopFound.Price)}");
         }
 
         public static Cooktop getOne(long codeBar)

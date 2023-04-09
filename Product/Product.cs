@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,10 @@ namespace poo_ap1
             this.Brand = brand;
             this.Price = price;
             this.Supplier = supplier;
+        }
+
+        public static String currencyFormatter(double price){
+            return string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", price);
         }
 
     }
