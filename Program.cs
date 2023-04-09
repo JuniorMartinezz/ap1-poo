@@ -63,8 +63,8 @@ class Program
                 break;
 
             case "2":
-                /*                 nameOfProduct = "Cooktop";
-                                CreateCooktop(nameOfProduct, i); */
+                nameOfProduct = "Cooktop";
+                CreateCooktop(nameOfProduct);
                 break;
 
             case "0":
@@ -108,45 +108,43 @@ class Program
         Fridge fridge = new Fridge(inputBarCode, inputName, inputBrand, inputPrice, SupplierRepository.get(inputId), inputCapacity, inputColor);
 
         FridgeRepository.Add(fridge);
-        ProductsRepository.Add(fridge);
 
         System.Console.WriteLine("\nGeladeira cadastrada!");
     }
-    /*     static void CreateCooktop(string nameOfProduct, int i) //Criador de cooktop
-        {
-            string inputName = nameOfProduct;
+    static void CreateCooktop(string nameOfProduct) //Criador de cooktop
+    {
+        string inputName = nameOfProduct;
 
-            //Secao codigo de barras e categoria
-            System.Console.WriteLine("\nDigite seu código de barras:");
-            long inputBarCode = Convert.ToInt64(Console.ReadLine());
+        //Secao codigo de barras e categoria
+        System.Console.WriteLine("\nDigite seu código de barras:");
+        long inputBarCode = Convert.ToInt64(Console.ReadLine());
 
-            System.Console.WriteLine("\nDigite a categoria do produto:");
-            string inputCategory = Console.ReadLine();
+        //Secao modelo, bocas, tipo, material
+        System.Console.WriteLine("\nDigite a marca do produto:");
+        string inputBrand = Console.ReadLine();
 
-            //Secao modelo, bocas, tipo, material
-            System.Console.WriteLine("\nDigite a marca do produto:");
-            string inputBrand = Console.ReadLine();
+        System.Console.WriteLine("\nDigite a quantidade de bocas que o cooktop possui:");
+        int inputBurners = Convert.ToInt32(Console.ReadLine());
 
-            System.Console.WriteLine("\nDigite a quantidade de bocas que o cooktop possui:");
-            int inputBurners = Convert.ToInt32(Console.ReadLine());
+        System.Console.WriteLine("\nDigite o material do produto:");
+        string inputMaterial = Console.ReadLine();
 
-            System.Console.WriteLine("\nDigite o tipo do produto: (Ex: gás, indução)");
-            string inputType = Console.ReadLine();
+        System.Console.WriteLine("\nDigite o preço do produto:");
+        double inputPrice = Convert.ToDouble(Console.ReadLine());
 
-            System.Console.WriteLine("\nDigite o material do produto:");
-            string inputMaterial = Console.ReadLine();
+        //Definindo fornecedor do produto
+        System.Console.WriteLine("| Lista de fornecedores |");
+        ListSuppliers();
+        System.Console.WriteLine("\nDigite o id correspondente ao fornecedor do produto:");
+        int inputId = Convert.ToInt32(Console.ReadLine());
 
-            System.Console.WriteLine("\nDigite o preço do produto:");
-            double inputPrice = Convert.ToDouble(Console.ReadLine());
+        //Montagem do objeto produto
+        Cooktop cooktop = new Cooktop(inputBarCode, inputName, inputBrand, inputPrice, SupplierRepository.get(inputId), inputBurners, inputMaterial);
 
-            //Montagem do objeto produto
-            Cooktop cooktop = new Cooktop(inputBarCode, inputName, inputCategory, inputPrice, SupplierRepository.get(1), inputBrand, inputBurners, inputType, inputMaterial);
+        CooktopRepository.Add(cooktop);
 
-            CooktopRepository.Add(cooktop);
-            ProductsRepository.Add(cooktop);
-
-            System.Console.WriteLine("\nCooktop cadastrado!");
-        } */
+        System.Console.WriteLine("\nCooktop cadastrado!");
+    }
     static void CreateSupplier() //Criador de fornecedor
     {
         //Secao id nome e cnpj
@@ -197,17 +195,21 @@ class Program
 
         System.Console.WriteLine("\nFornecedor cadastrado!");
     }
-    /*     static void ListCooktops() //Listar Cooktops
-        {
-            CooktopRepository.get();
-        } */
+    static void ListCooktops() //Listar Cooktops
+    {
+        CooktopRepository.get();
+    }
     static void ListFridges() //Listar Geladeiras
     {
-        FridgeRepository.getAll();
+        FridgeRepository.get();
     }
     static void ListProducts()
     {
-        ProductsRepository.get();
+        System.Console.WriteLine("\nCooktops");
+        ListCooktops();
+
+        System.Console.WriteLine("\nGeladeiras");
+        ListFridges();
     }
     static void ListSuppliers() //Listar Fornecedores
     {
@@ -217,9 +219,9 @@ class Program
     {
         DateTime today = DateTime.Today;
 
-        ProductsRepository.get();
+        ListProducts();
 
-        System.Console.WriteLine("\nDigite o id:");
+        System.Console.WriteLine("\nDigite o id da compra:");
         int idBuy = Convert.ToInt32(Console.ReadLine());
 
         System.Console.WriteLine("\nDigite o código de barras do produto desejado:");
@@ -228,13 +230,37 @@ class Program
         System.Console.WriteLine("\nDigite a quantidade desejada:");
         int inputAmount = Convert.ToInt32(Console.ReadLine());
 
-        Product selectedProduct = ProductsRepository.get(inputCodeBar);
+        double totalPrice;
 
-        Buy buy = new Buy(idBuy, today, selectedProduct, inputAmount);
+        if (CooktopRepository.get(inputCodeBar) != null)
+        {
+            Cooktop selectedCooktop = CooktopRepository.get(inputCodeBar);
 
-        BuyRepository.Add(buy);
+            totalPrice = (selectedCooktop.Price * inputAmount);
 
-        System.Console.WriteLine("\nCompra realizada!");
+            Buy buy = new Buy(idBuy, today, selectedCooktop, inputAmount, totalPrice);
+
+            BuyRepository.Add(buy);
+
+            System.Console.WriteLine("\nCompra realizada!");
+        }
+        else if (FridgeRepository.get(inputCodeBar) != null)
+        {
+            Fridge selectedFridge = FridgeRepository.get(inputCodeBar);
+
+            totalPrice = (selectedFridge.Price * inputAmount);
+
+            Buy buy = new Buy(idBuy, today, selectedFridge, inputAmount, totalPrice);
+
+            BuyRepository.Add(buy);
+
+            System.Console.WriteLine("\nCompra realizada!");
+        }
+        else
+        {
+            System.Console.WriteLine("Código de produto inválido!");
+            Environment.Exit(0);
+        }
     }
     static void ListBuys()
     {
@@ -295,7 +321,7 @@ class Program
         {
             case "1":
                 CreateSupplier();
-                
+
                 break;
 
             case "2":

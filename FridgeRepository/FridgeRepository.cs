@@ -14,7 +14,7 @@ namespace poo_ap1
             FridgesList.Add(fridge);
         }
 
-        public static void getAll()
+        public static void get()
         {
             int i = 0;
             if (FridgesList == null)
@@ -25,6 +25,16 @@ namespace poo_ap1
             {
                 Console.WriteLine($"\nCódigo de barras: {f.BarCode} | Nome: {f.Name} | Marca: {f.Brand} | Marca: {f.Brand} | Capacidade: {f.Capacity} litros | Cor: {f.Color} | Fornecedor: {f.Supplier.Name}");
             }
+        }
+
+        public static Fridge get(long codeBar)
+        {
+            if (FridgesList == null)
+            {
+                System.Console.WriteLine("\nNenhum usuário cadastrado!");
+            }
+
+            return FridgesList.Find(f => f.BarCode == codeBar);
         }
     }
 }

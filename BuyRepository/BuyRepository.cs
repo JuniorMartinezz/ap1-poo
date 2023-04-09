@@ -26,7 +26,7 @@ namespace poo_ap1
             {
                 var product = b.Products.Find(p => p.Name == p.Name);
 
-                Console.WriteLine($"\nId: {b.Id} | Data da compra: {b.Date} | Produto: {product} |Quantidade: {b.Amount}");
+                Console.WriteLine($"\nId: {b.Id} | Data da compra: {b.Date} | Produto: {product.Name} | Quantidade: {b.Amount} | Valor total: R${b.TotalPrice}");
             }
         }
     }
