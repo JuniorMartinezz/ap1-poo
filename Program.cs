@@ -12,7 +12,7 @@ class Program
         {
             System.Console.WriteLine
             (
-                "\nDigite o número do que deseja executar: \n\n1- Criar(Fornecedores, produtos e compras) \n2- Consultar(Fornecedores, produtos e compras) \n3- Efetuar compra \n0- Sair do programa\n"
+                "\nDigite o número do que deseja executar: \n\n1- Criar(Fornecedores e produtos) \n2- Consultar(Fornecedores, produtos e compras) \n3- Efetuar compra \n0- Sair do programa\n"
             );
             op = Console.ReadLine();
 
@@ -29,7 +29,7 @@ class Program
                     break;
 
                 case "3": //Efetuar compra
-                    if (CooktopRepository.CooktopsList.Count == 0 || FridgeRepository.FridgesList.Count == 0)
+                    if (CooktopRepository.CooktopsList.Count == 0 && FridgeRepository.FridgesList.Count == 0)
                     {
                         System.Console.WriteLine("\nNenhum produto cadastrado para efetuar compra!");
                     }
@@ -103,7 +103,7 @@ class Program
         double inputPrice = Convert.ToDouble(Console.ReadLine());
 
         //Definindo fornecedor do produto
-        System.Console.WriteLine("| Lista de fornecedores |");
+        System.Console.WriteLine("\n| Lista de fornecedores |");
         ListSuppliers();
         System.Console.WriteLine("\nDigite o id correspondente ao fornecedor do produto:");
         int inputId = Convert.ToInt32(Console.ReadLine());
@@ -216,26 +216,20 @@ class Program
         System.Console.WriteLine("\nDigite o código de barras do produto que deseja consultar:");
         long inputCodeBar = Convert.ToInt64(Console.ReadLine());
 
-        if (CooktopRepository.CooktopsList.Count == 0 || FridgeRepository.FridgesList.Count == 0)
+        if (CooktopRepository.getOne(inputCodeBar) != null)
         {
-            System.Console.WriteLine("\nLista de produtos vazia!");
+            CooktopRepository.get(inputCodeBar);
+        }
+        else if (FridgeRepository.getOne(inputCodeBar) != null)
+        {
+            FridgeRepository.get(inputCodeBar);
         }
         else
         {
-            if (CooktopRepository.getOne(inputCodeBar) != null)
-            {
-                CooktopRepository.get(inputCodeBar);
-            }
-            else if (FridgeRepository.getOne(inputCodeBar) != null)
-            {
-                FridgeRepository.get(inputCodeBar);
-            }
-            else
-            {
-                System.Console.WriteLine("\nCódigo de barras inválido!");
-                Environment.Exit(0);
-            }
+            System.Console.WriteLine("\nCódigo de barras inválido!");
+            Environment.Exit(0);
         }
+
     }
     static void ListSuppliers() //Listar Fornecedores
     {
@@ -245,7 +239,7 @@ class Program
     {
         DateTime today = DateTime.Now;
 
-        ListProducts();
+        ListAllProducts();
 
         System.Console.WriteLine("\nDigite o id da compra:");
         int idBuy = Convert.ToInt32(Console.ReadLine());
@@ -288,6 +282,19 @@ class Program
             Environment.Exit(0);
         }
     }
+
+    static void ListAllProducts()
+    {
+        foreach (var c in CooktopRepository.CooktopsList)
+        {
+            Console.WriteLine($"\nCódigo de barras: {c.BarCode} | Nome: {c.Name} | Marca: {c.Brand} | Preço: {c.Price} | Bocas: {c.Burners} | Material: {c.Material} | Fornecedor: {c.Supplier.Name}");
+        }
+
+        foreach (var f in FridgeRepository.FridgesList)
+        {
+            Console.WriteLine($"\nCódigo de barras: {f.BarCode} | Nome: {f.Name} | Marca: {f.Brand} | Preço: {f.Price} | Capacidade: {f.Capacity} litros | Cor: {f.Color} | Fornecedor: {f.Supplier.Name}");
+        }
+    }
     static void ListBuys()
     {
         BuyRepository.get();
@@ -312,7 +319,14 @@ class Program
                 break;
 
             case "2":
-                ListProducts();
+                if (CooktopRepository.CooktopsList.Count == 0 && FridgeRepository.FridgesList.Count == 0)
+                {
+                    System.Console.WriteLine("\nLista de produtos vazia!");
+                }
+                else
+                {
+                    ListProducts();
+                }
 
                 break;
 
