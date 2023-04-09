@@ -16,26 +16,36 @@ namespace poo_ap1
 
         public static void get()
         {
-            int i = 0;
-            if (CooktopsList == null)
+            if (CooktopsList.Count == 0)
             {
-                System.Console.WriteLine("\nNenhum usuário cadastrado!");
+                System.Console.WriteLine("\nNenhum cooktop cadastrado!");
             }
             foreach (var c in CooktopsList)
             {
                 Console.WriteLine($"\nCódigo de barras: {c.BarCode} | Nome: {c.Name} | Marca: {c.Brand} | Preço: {c.Price} | Bocas: {c.Burners} | Material: {c.Material} | Fornecedor: {c.Supplier.Name}");
             }
         }
-
-        public static Cooktop get(long codeBar)
+        
+        public static void get(long codeBar)
         {
-            if (CooktopsList == null)
+            if (CooktopsList.Count == 0)
             {
-                System.Console.WriteLine("\nNenhum usuário cadastrado!");
+                System.Console.WriteLine("\nNenhum cooktop cadastrado!");
+            }
+
+            var cooktopFound = CooktopsList.Find(c => c.BarCode == codeBar);
+
+            Console.WriteLine($"\nCódigo de barras: {cooktopFound.BarCode} | Nome: {cooktopFound.Name} | Marca: {cooktopFound.Brand} | Preço: {cooktopFound.Price} | Bocas: {cooktopFound.Burners} | Material: {cooktopFound.Material} | Fornecedor: {cooktopFound.Supplier.Name}");
+        }
+
+        public static Cooktop getOne(long codeBar)
+        {
+            if (CooktopsList.Count == 0)
+            {
+                System.Console.WriteLine("\nNenhum cooktop cadastrado!");
             }
 
             return CooktopsList.Find(c => c.BarCode == codeBar);
         }
-
     }
 }

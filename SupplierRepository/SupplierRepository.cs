@@ -17,9 +17,9 @@ namespace poo_ap1
         public static void getAll()
         {
             int i = 0;
-            if (SuppliersList == null)
+            if (SuppliersList.Count == 0)
             {
-                System.Console.WriteLine("\nNenhum usuário cadastrado!");
+                System.Console.WriteLine("\nNenhum fornecedor cadastrado!");
             }
 
             foreach (var s in SuppliersList)
@@ -31,7 +31,7 @@ namespace poo_ap1
 
         public static Supplier get(long id)
         {
-            if (SuppliersList == null)
+            if (SuppliersList.Count == 0)
             {
                 System.Console.WriteLine("\nNenhum fornecedor cadastrado!");
             }

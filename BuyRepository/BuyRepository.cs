@@ -16,8 +16,7 @@ namespace poo_ap1
 
         public static void get()
         {
-            int i = 0;
-            if (BuysList == null)
+            if (BuysList.Count == 0)
             {
                 System.Console.WriteLine("\nNenhuma compra cadastrada!");
             }
@@ -26,7 +25,7 @@ namespace poo_ap1
             {
                 var product = b.Products.Find(p => p.Name == p.Name);
 
-                Console.WriteLine($"\nId: {b.Id} | Data da compra: {b.Date} | Produto: {product.Name} | Quantidade: {b.Amount} | Valor total: R${b.TotalPrice}");
+                Console.WriteLine($"\nId da compra: {b.Id} | Data da compra: {b.Date} | Produto: {product.Name} | Quantidade: {b.Amount} | Valor total: R${b.TotalPrice}");
             }
         }
     }

@@ -29,7 +29,14 @@ class Program
                     break;
 
                 case "3": //Efetuar compra
-                    Buy();
+                    if (CooktopRepository.CooktopsList.Count == 0 || FridgeRepository.FridgesList.Count == 0)
+                    {
+                        System.Console.WriteLine("\nNenhum produto cadastrado para efetuar compra!");
+                    }
+                    else
+                    {
+                        Buy();
+                    }
 
                     break;
 
@@ -89,9 +96,6 @@ class Program
         System.Console.WriteLine("\nDigite a capacidade produto: (Em litros)");
         int inputCapacity = Convert.ToInt32(Console.ReadLine());
 
-        System.Console.WriteLine("\nDigite o tipo do produto: (Ex: frost free, manual)");
-        string inputType = Console.ReadLine();
-
         System.Console.WriteLine("\nDigite a cor do produto:");
         string inputColor = Console.ReadLine();
 
@@ -100,7 +104,7 @@ class Program
 
         //Definindo fornecedor do produto
         System.Console.WriteLine("| Lista de fornecedores |");
-        SupplierRepository.getAll();
+        ListSuppliers();
         System.Console.WriteLine("\nDigite o id correspondente ao fornecedor do produto:");
         int inputId = Convert.ToInt32(Console.ReadLine());
 
@@ -199,17 +203,39 @@ class Program
     {
         CooktopRepository.get();
     }
+    static void ListCooktops(int codeBar) //Listar Cooktops
+    {
+        CooktopRepository.get(codeBar);
+    }
     static void ListFridges() //Listar Geladeiras
     {
         FridgeRepository.get();
     }
     static void ListProducts()
     {
-        System.Console.WriteLine("\nCooktops");
-        ListCooktops();
+        System.Console.WriteLine("\nDigite o código de barras do produto que deseja consultar:");
+        long inputCodeBar = Convert.ToInt64(Console.ReadLine());
 
-        System.Console.WriteLine("\nGeladeiras");
-        ListFridges();
+        if (CooktopRepository.CooktopsList.Count == 0 || FridgeRepository.FridgesList.Count == 0)
+        {
+            System.Console.WriteLine("\nLista de produtos vazia!");
+        }
+        else
+        {
+            if (CooktopRepository.getOne(inputCodeBar) != null)
+            {
+                CooktopRepository.get(inputCodeBar);
+            }
+            else if (FridgeRepository.getOne(inputCodeBar) != null)
+            {
+                FridgeRepository.get(inputCodeBar);
+            }
+            else
+            {
+                System.Console.WriteLine("\nCódigo de barras inválido!");
+                Environment.Exit(0);
+            }
+        }
     }
     static void ListSuppliers() //Listar Fornecedores
     {
@@ -217,7 +243,7 @@ class Program
     }
     static void Buy()
     {
-        DateTime today = DateTime.Today;
+        DateTime today = DateTime.Now;
 
         ListProducts();
 
@@ -232,9 +258,9 @@ class Program
 
         double totalPrice;
 
-        if (CooktopRepository.get(inputCodeBar) != null)
+        if (CooktopRepository.getOne(inputCodeBar) != null)
         {
-            Cooktop selectedCooktop = CooktopRepository.get(inputCodeBar);
+            Cooktop selectedCooktop = CooktopRepository.getOne(inputCodeBar);
 
             totalPrice = (selectedCooktop.Price * inputAmount);
 
@@ -244,9 +270,9 @@ class Program
 
             System.Console.WriteLine("\nCompra realizada!");
         }
-        else if (FridgeRepository.get(inputCodeBar) != null)
+        else if (FridgeRepository.getOne(inputCodeBar) != null)
         {
-            Fridge selectedFridge = FridgeRepository.get(inputCodeBar);
+            Fridge selectedFridge = FridgeRepository.getOne(inputCodeBar);
 
             totalPrice = (selectedFridge.Price * inputAmount);
 
@@ -305,8 +331,6 @@ class Program
     }
     static void Create()
     {
-        int i = 0;
-
         System.Console.WriteLine("\nDigite o número correspondente ao processo que deseja realizar\n1- Fornecedor \n2- Produtos \n0- Sair\n");
 
         string op = Console.ReadLine();
@@ -325,7 +349,14 @@ class Program
                 break;
 
             case "2":
-                CreateProduct();
+                if (SupplierRepository.SuppliersList.Count == 0)
+                {
+                    System.Console.WriteLine("\nVocê precisa adicionar fornecedores primeiro!");
+                }
+                else
+                {
+                    CreateProduct();
+                }
 
                 break;
 

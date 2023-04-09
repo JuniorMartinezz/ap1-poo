@@ -18,7 +18,7 @@ namespace poo_ap1
         }
 
         public string CompletePhone(){
-            string completePhone = $"+{this.CountryCode}{this.AreaCode}{this.Number}";
+            string completePhone = $"{this.CountryCode}{this.AreaCode}{this.Number}";
             return completePhone;
         }
     }
