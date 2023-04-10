@@ -16,5 +16,14 @@ namespace poo_ap1
             this.Capacity = capacity;
             this.Color = color;
         }
+
+        public override void AddInterestRate(double interestRate)
+        {
+            double iRate = interestRate / 100;
+
+            double valueWIR = this.Price+iRate;
+
+            System.Console.WriteLine($"\nValor da geladeira com juros: {Product.CurrencyFormatter(valueWIR)}");
+        }
     }
 }

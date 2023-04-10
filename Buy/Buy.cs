@@ -12,13 +12,15 @@ namespace poo_ap1
         public List<Product> Products { get; set; } = new List<Product>();
         public int Amount { get; set; }
         public double TotalPrice { get; set; }
+        public int PaymentMethod { get; set; }
 
-        public Buy(int id, DateTime date, Product product, int amount, double totalPrice){
+        public Buy(int id, DateTime date, Product product, int amount, double totalPrice, int paymentMethod){
             this.Id = id;
             this.Date = date;
             Products.Add(product);
             this.Amount = amount;
             this.TotalPrice = totalPrice;
+            this.PaymentMethod = paymentMethod;
         }
     }
 }

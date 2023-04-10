@@ -15,7 +15,7 @@ namespace poo_ap1
             CooktopsList.Add(cooktop);
         }
 
-        public static void get()
+        public static void Get()
         {
             if (CooktopsList.Count == 0)
             {
@@ -23,11 +23,11 @@ namespace poo_ap1
             }
             foreach (var c in CooktopsList)
             {
-                Console.WriteLine($"\nCódigo de barras: {c.BarCode} | Nome: {c.Name} | Marca: {c.Brand} | Bocas: {c.Burners} | Material: {c.Material} | Fornecedor: {c.Supplier.Name} | Preço: {Product.currencyFormatter(c.Price)}");
+                Console.WriteLine($"\nCódigo de barras: {c.BarCode} | Nome: {c.Name} | Marca: {c.Brand} | Bocas: {c.Burners} | Material: {c.Material} | Fornecedor: {c.Supplier.Name} | Preço: {Product.CurrencyFormatter(c.Price)}");
             }
         }
         
-        public static void get(long codeBar)
+        public static void Get(long codeBar)
         {
             if (CooktopsList.Count == 0)
             {
@@ -36,10 +36,10 @@ namespace poo_ap1
 
             var cooktopFound = CooktopsList.Find(c => c.BarCode == codeBar);
 
-            Console.WriteLine($"\nCódigo de barras: {cooktopFound.BarCode} | Nome: {cooktopFound.Name} | Marca: {cooktopFound.Brand} | Bocas: {cooktopFound.Burners} | Material: {cooktopFound.Material} | Fornecedor: {cooktopFound.Supplier.Name} | Preço: {Product.currencyFormatter(cooktopFound.Price)}");
+            Console.WriteLine($"\nCódigo de barras: {cooktopFound.BarCode} | Nome: {cooktopFound.Name} | Marca: {cooktopFound.Brand} | Bocas: {cooktopFound.Burners} | Material: {cooktopFound.Material} | Fornecedor: {cooktopFound.Supplier.Name} | Preço: {Product.CurrencyFormatter(cooktopFound.Price)}");
         }
 
-        public static Cooktop getOne(long codeBar)
+        public static Cooktop GetOne(long codeBar)
         {
             if (CooktopsList.Count == 0)
             {

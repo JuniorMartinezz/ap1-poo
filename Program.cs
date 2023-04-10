@@ -233,15 +233,15 @@ class Program
     }
     static void ListCooktops() //Listar Cooktops
     {
-        CooktopRepository.get();
+        CooktopRepository.Get();
     }
     static void ListCooktops(int codeBar) //Listar Cooktops
     {
-        CooktopRepository.get(codeBar);
+        CooktopRepository.Get(codeBar);
     }
     static void ListFridges() //Listar Geladeiras
     {
-        FridgeRepository.get();
+        FridgeRepository.Get();
     }
     static void ListProducts()
     {
@@ -276,7 +276,7 @@ class Program
                         }
                         else
                         {
-                            FridgeRepository.get(Convert.ToInt64(inputCodeBar));
+                            FridgeRepository.Get(Convert.ToInt64(inputCodeBar));
                         }
                     }
 
@@ -308,7 +308,7 @@ class Program
                         }
                         else
                         {
-                            CooktopRepository.get(Convert.ToInt64(inputCodeBar));
+                            CooktopRepository.Get(Convert.ToInt64(inputCodeBar));
                         }
                     }
                 }
@@ -345,25 +345,61 @@ class Program
 
         double totalPrice;
 
-        if (CooktopRepository.getOne(inputCodeBar) != null)
+        if (CooktopRepository.GetOne(inputCodeBar) != null)
         {
-            Cooktop selectedCooktop = CooktopRepository.getOne(inputCodeBar);
+            Cooktop selectedCooktop = CooktopRepository.GetOne(inputCodeBar);
 
             totalPrice = (selectedCooktop.Price * inputAmount);
 
-            Buy buy = new Buy(idBuy, today, selectedCooktop, inputAmount, totalPrice);
+            System.Console.WriteLine
+                    (
+                        "\nDigite o número correspondente ao método de pagamento: \n\n1- Dinheiro \n2- Cartão de crédito \n0- Sair do programa\n"
+                    );
+
+            int paymentMethod = Convert.ToInt32(Console.ReadLine());
+
+            switch (paymentMethod)
+            {
+                case 1:
+
+                    break;
+
+                case 2:
+                    selectedCooktop.AddInterestRate(12.0);
+                    break;
+            }
+
+            Buy buy = new Buy(idBuy, today, selectedCooktop, inputAmount, totalPrice, paymentMethod);
 
             BuyRepository.Add(buy);
 
             System.Console.WriteLine("\nCompra realizada!");
         }
-        else if (FridgeRepository.getOne(inputCodeBar) != null)
+        else if (FridgeRepository.GetOne(inputCodeBar) != null)
         {
-            Fridge selectedFridge = FridgeRepository.getOne(inputCodeBar);
+            Fridge selectedFridge = FridgeRepository.GetOne(inputCodeBar);
+
+            System.Console.WriteLine
+                   (
+                       "\nDigite o número correspondente ao método de pagamento: \n\n1- Dinheiro \n2- Cartão de crédito \n0- Sair do programa\n"
+                   );
+
+            int paymentMethod = Convert.ToInt32(Console.ReadLine());
+
+            switch (paymentMethod)
+            {
+                case 1:
+
+                    break;
+
+                case 2:
+                    selectedFridge.AddInterestRate(15.0);
+                    break;
+            }
 
             totalPrice = (selectedFridge.Price * inputAmount);
 
-            Buy buy = new Buy(idBuy, today, selectedFridge, inputAmount, totalPrice);
+            Buy buy = new Buy(idBuy, today, selectedFridge, inputAmount, totalPrice, paymentMethod);
 
             BuyRepository.Add(buy);
 
@@ -389,7 +425,7 @@ class Program
     }
     static void ListBuys()
     {
-        BuyRepository.get();
+        BuyRepository.Get();
     }
     static void Consult()
     {

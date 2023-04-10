@@ -22,8 +22,12 @@ namespace poo_ap1
             this.Supplier = supplier;
         }
 
-        public static String currencyFormatter(double price){
+        public static String CurrencyFormatter(double price){
             return string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", price);
+        }
+
+        public virtual void AddInterestRate(double interestRate){
+            System.Console.WriteLine("Produto com acréscimo!");
         }
 
     }
