@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\code\\POO-2023\\ap1-poo\\ap1-poo.csproj": {}
+    "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\ap1-poo.csproj": {}
   },
   "projects": {
-    "D:\\code\\POO-2023\\ap1-poo\\ap1-poo.csproj": {
+    "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\ap1-poo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\code\\POO-2023\\ap1-poo\\ap1-poo.csproj",
+        "projectUniqueName": "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\ap1-poo.csproj",
         "projectName": "ap1-poo",
-        "projectPath": "D:\\code\\POO-2023\\ap1-poo\\ap1-poo.csproj",
-        "packagesPath": "C:\\Users\\junio\\.nuget\\packages\\",
-        "outputPath": "D:\\code\\POO-2023\\ap1-poo\\obj\\",
+        "projectPath": "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\ap1-poo.csproj",
+        "packagesPath": "C:\\Users\\juniormartinez2000\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\junio\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\juniormartinez2000\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -37,6 +37,18 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
