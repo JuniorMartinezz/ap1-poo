@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ap1_poo.Data.Repositories;
 using ap1_poo.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace poo_ap1
 {
@@ -11,6 +12,10 @@ namespace poo_ap1
     {
         private readonly DataContext context;
 
+        public BuyRepository(DataContext context)
+        {
+            this.context = context;
+        }
         public void Delete(int entityId)
         {
             var b = GetById(entityId);
@@ -20,22 +25,26 @@ namespace poo_ap1
 
         public IList<Buy> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Buys.ToList();
         }
 
         public Buy GetById(int entityId)
         {
-            throw new NotImplementedException();
+            return context.Buys.SingleOrDefault(x => x.Id == entityId);
         }
 
         public void Save(Buy entity)
         {
-            throw new NotImplementedException();
+            entity.Product = context.Products.Find(entity.Product.Id);
+            context.Add(entity);
+            context.SaveChanges();
         }
 
         public void Update(Buy entity)
         {
-            throw new NotImplementedException();
+            entity.Product = context.Products.Find(entity.Product.Id);
+            context.Buys.Update(entity);
+            context.SaveChanges();
         }
     }
 }
