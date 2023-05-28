@@ -133,23 +133,44 @@ class Program
 
             //Secao de cidade
             ListCities();
-            System.Console.WriteLine("\nDigite o id da cidade:");
-            int inputIdCity = Convert.ToInt32(Console.ReadLine());
+            /*             System.Console.WriteLine("\nDigite o id da cidade:");
+                        int inputIdCity = Convert.ToInt32(Console.ReadLine()); */
 
-            var newCity = new City { Id = inputIdCity };
+            System.Console.WriteLine("\nDigite o nome da cidade:");
+            string inputNameCity = Console.ReadLine();
 
-            //Montagem do objeto fornecedor
-            var supplier = new Supplier()
+            var cityFound = cityRepository.GetByName(inputNameCity);
+
+            if (cityFound != null)
             {
-                Name = inputName,
-                Phone = inputPhoneNumber,
-                Cnpj = inputCnpj,
-                City = newCity
-            };
+                var supplier = new Supplier
+                {
+                    Name = inputName,
+                    Phone = inputPhoneNumber,
+                    Cnpj = inputCnpj,
+                    City = cityFound
+                };
 
-            supplierRepository.Save(supplier);
+                supplierRepository.Save(supplier);
 
-            System.Console.WriteLine("\nFornecedor cadastrado!");
+                System.Console.WriteLine("\nFornecedor cadastrado!");
+            }
+            else
+            {
+                var newCity = new City { Name = inputNameCity };
+
+                var supplier = new Supplier
+                {
+                    Name = inputName,
+                    Phone = inputPhoneNumber,
+                    Cnpj = inputCnpj,
+                    City = newCity
+                };
+
+                supplierRepository.Save(supplier);
+
+                System.Console.WriteLine("\nFornecedor cadastrado!");
+            }
         }
         void CreateProduct() //Criador de produto
         {
@@ -407,19 +428,27 @@ class Program
 
                     //Secao de cidade
                     ListCities();
-                    System.Console.WriteLine("\nDigite o id da cidade:");
-                    string inputIdCity = Console.ReadLine();
+                    System.Console.WriteLine("\nDigite o nome da cidade:");
+                    string inputNameCity = Console.ReadLine();
+                    string inputCity = inputNameCity == "" ? s.City.Name : inputNameCity;
 
-                    var newCity = new City
+                    var cityFound = cityRepository.GetByName(inputCity);
+
+                    if (cityFound != null)
                     {
-                        Id = inputIdCity == "" ? s.City.Id : Convert.ToInt32(inputIdCity)
-                    };
+                        s.City = cityFound;
 
-                    s.City = newCity;
+                        supplierRepository.Update(s);
+                        System.Console.WriteLine("\nFornecedor alterado!");
+                    }
+                    else
+                    {
+                        var newCity = new City { Name = inputCity };
 
-                    supplierRepository.Update(s);
+                        supplierRepository.Update(s);
 
-                    System.Console.WriteLine("\nFornecedor alterado!");
+                        System.Console.WriteLine("\nFornecedor cadastrado!");
+                    }
                 }
                 else
                 {

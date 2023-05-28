@@ -37,14 +37,12 @@ namespace poo_ap1
 
         public void Save(Supplier entity)
         {
-            entity.City = context.Cities.Find(entity.City.Id);
             context.Add(entity);
             context.SaveChanges();
         }
 
         public void Update(Supplier entity)
         {
-            entity.City = context.Cities.Find(entity.City.Id);
             context.Suppliers.Update(entity);
             context.SaveChanges();
         }

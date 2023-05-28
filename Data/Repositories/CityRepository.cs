@@ -30,6 +30,11 @@ namespace ap2_poo.Data.Repositories
             return context.Cities.SingleOrDefault(x => x.Id == entityId);
         }
 
+        public City GetByName(string entityName)
+        {
+            return context.Cities.SingleOrDefault(x => x.Name == entityName);
+        }
+
         public void Save(City entity)
         {
             context.Add(entity);
