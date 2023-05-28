@@ -26,7 +26,7 @@ class Program
         do
         {
             System.Console.WriteLine(
-                "\nDigite o número do que deseja executar: \n\n1- Criar(Fornecedores e produtos) \n2- Editar (Fornecedores, produtos) \n3- Consultar(Fornecedores, produtos e compras) \n4- Efetuar compra \n0- Sair do programa\n"
+                "\nDigite o número do que deseja executar: \n\n1- Criar(Fornecedores e produtos) \n2- Editar (Fornecedores, produtos) \n3- Excluir (Fornecedores, produtos) \n4- Consultar(Fornecedores, produtos e compras) \n5- Efetuar compra \n0- Sair do programa\n"
             );
             op = Console.ReadLine();
 
@@ -41,12 +41,18 @@ class Program
                     Update();
 
                     break;
-                case "3": //Consultar fornecedor, compras e produtos
+
+                case "3":
+                    Delete();
+
+                    break;
+
+                case "4": //Consultar fornecedor, compras e produtos
                     Consult();
 
                     break;
 
-                case "4": //Efetuar compra
+                case "5": //Efetuar compra
                     if (productRepository.GetAll == null)
                     {
                         System.Console.WriteLine(
@@ -266,6 +272,110 @@ class Program
                 default:
                     System.Console.WriteLine("\nDigite um código válido!");
                     break;
+            }
+        }
+        void Delete()
+        {
+            System.Console.WriteLine(
+                "\nDigite o número correspondente ao processo que deseja realizar\n1- Fornecedor \n2- Produtos \n0- Sair\n"
+            );
+
+            string op = Console.ReadLine();
+
+            if (op == "" || op == null)
+            {
+                System.Console.WriteLine("\nVocê precisa digitar um comando válido!");
+                Environment.Exit(0);
+            }
+
+            switch (op)
+            {
+                case "1":
+                    if (supplierRepository.GetAll().Count != 0)
+                    {
+                        DeleteSupplier();
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("\nNenhum fornecedor cadastrado!");
+                    }
+
+                    break;
+
+                case "2":
+                    if (productRepository.GetAll().Count != 0)
+                    {
+                        DeleteProduct();
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("\nNenhum produto cadastrado!");
+                    }
+
+                    break;
+
+                case "0":
+                    break;
+
+                default:
+                    System.Console.WriteLine("\nDigite um código válido!");
+                    break;
+            }
+        }
+        void DeleteSupplier()
+        {
+            ListSuppliers();
+
+            System.Console.WriteLine("\nDigite o id do fornecedor que deseja remover:");
+            string idSupplier = Console.ReadLine();
+
+            if (idSupplier != "")
+            {
+                var s = supplierRepository.GetById(Convert.ToInt32(idSupplier));
+
+                if (s != null)
+                {
+                    supplierRepository.Delete(s.Id);
+
+                    System.Console.WriteLine("\nFornecedor removido!");
+                }
+                else
+                {
+                    System.Console.WriteLine("\nO id digitado é inválido!");
+                    return;
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("\nO id digitado é inválido!");
+                return;
+            }
+        }
+        void DeleteProduct()
+        {
+            ListProducts();
+
+            System.Console.WriteLine("\nDigite o código de barras do produto que deseja remover:");
+            string BarCodeProduct = Console.ReadLine();
+
+            if (BarCodeProduct != "")
+            {
+                var p = productRepository.GetByBarCode(BarCodeProduct);
+
+                if (p != null)
+                {
+                    productRepository.Delete(p.Id);
+
+                    System.Console.WriteLine("\nProduto removido!");
+                }
+                else
+                {
+                    System.Console.WriteLine("\nCódigo de barras inválido!");
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("\nCódigo de barras inválido!");
             }
         }
         void UpdateSuppliers()
