@@ -3748,19 +3748,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\junior\\.nuget\\packages\\": {}
+    "C:\\Users\\juniormartinez2000\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\junior\\documents\\ap2-poo\\ap1-poo.csproj",
+      "projectUniqueName": "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\ap1-poo.csproj",
       "projectName": "ap1-poo",
-      "projectPath": "C:\\Users\\junior\\documents\\ap2-poo\\ap1-poo.csproj",
-      "packagesPath": "C:\\Users\\junior\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\junior\\documents\\ap2-poo\\obj\\",
+      "projectPath": "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\ap1-poo.csproj",
+      "packagesPath": "C:\\Users\\juniormartinez2000\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\juniormartinez2000\\Documents\\ap1-poo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\junior\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\juniormartinez2000\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3815,7 +3815,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -53,7 +53,7 @@ class Program
                     break;
 
                 case "5": //Efetuar compra
-                    if (productRepository.GetAll == null)
+                    if (productRepository.GetAll().Count == 0)
                     {
                         System.Console.WriteLine(
                             "\nNenhum produto cadastrado para efetuar compra!"
@@ -133,8 +133,6 @@ class Program
 
             //Secao de cidade
             ListCities();
-            /*             System.Console.WriteLine("\nDigite o id da cidade:");
-                        int inputIdCity = Convert.ToInt32(Console.ReadLine()); */
 
             System.Console.WriteLine("\nDigite o nome da cidade:");
             string inputNameCity = Console.ReadLine();
