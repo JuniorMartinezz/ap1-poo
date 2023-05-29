@@ -198,6 +198,8 @@ class Program
             };
 
             productRepository.Save(product);
+
+            System.Console.WriteLine("\nProduto cadastrado!");
         }
         void Consult()
         {
@@ -432,7 +434,7 @@ class Program
                     string inputNameCity = Console.ReadLine();
                     string inputCity = inputNameCity == "" ? s.City.Name : inputNameCity;
 
-                    var cityFound = cityRepository.GetByName(inputCity);
+                    var cityFound = cityRepository.GetByName(inputNameCity);
 
                     if (cityFound != null)
                     {
@@ -444,6 +446,8 @@ class Program
                     else
                     {
                         var newCity = new City { Name = inputCity };
+
+                        s.City = newCity;
 
                         supplierRepository.Update(s);
 
