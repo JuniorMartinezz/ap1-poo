@@ -13,9 +13,9 @@ namespace poo_ap1
     {
         private readonly DataContext context;
 
-        public SupplierRepository(DataContext context)
+        public SupplierRepository()
         {
-            this.context = context;
+            this.context = new DataContext();
         }
 
         public void Delete(int entityId)
